@@ -14,7 +14,7 @@
 
 **[Elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch)**是一个基于[Lucene](https://zh.wikipedia.org/wiki/Lucene)库的[搜索引擎](https://zh.wikipedia.org/wiki/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E)。它提供了一个分布式、支持[多租户](https://zh.wikipedia.org/wiki/%E5%A4%9A%E7%A7%9F%E6%88%B6%E6%8A%80%E8%A1%93)的[全文搜索](https://zh.wikipedia.org/wiki/%E5%85%A8%E6%96%87%E6%AA%A2%E7%B4%A2)引擎，具有[HTTP](https://zh.wikipedia.org/wiki/HTTP) Web接口和无模式[JSON](https://zh.wikipedia.org/wiki/JSON)文档。Elasticsearch是用[Java](https://zh.wikipedia.org/wiki/Java)开发的，并在[Apache许可证](https://zh.wikipedia.org/wiki/Apache%E8%AE%B8%E5%8F%AF%E8%AF%81)下作为开源软件发布。官方客户端在[Java](https://zh.wikipedia.org/wiki/Java)、[.NET](https://zh.wikipedia.org/wiki/.NET%E6%A1%86%E6%9E%B6)（[C#](https://zh.wikipedia.org/wiki/C%E2%99%AF)）、[PHP](https://zh.wikipedia.org/wiki/PHP)、[Python](https://zh.wikipedia.org/wiki/Python)、[Apache Groovy](https://zh.wikipedia.org/wiki/Groovy)、[Ruby](https://zh.wikipedia.org/wiki/Ruby)和许多其他语言中都是可用的。[[5\]](https://zh.wikipedia.org/wiki/Elasticsearch#cite_note-offizsite-5)根据DB-Engines的排名显示，Elasticsearch是最受欢迎的企业搜索引擎，其次是[Apache Solr](https://zh.wikipedia.org/wiki/Apache_Solr)，也是基于Lucene。[[6\]](https://zh.wikipedia.org/wiki/Elasticsearch#cite_note-6)
 
-<!-- ![](img/search05.png) -->
+![](img/search05.png)
 
 Elasticsearch是与名为Logstash的数据收集和日志解析引擎以及名为Kibana的分析和可视化平台一起开发的。这三个产品被设计成一个集成解决方案，称为“Elastic Stack”（以前称为“ELK stack”）。
 
@@ -50,7 +50,7 @@ Elasticsearch使用Lucene，并试图通过JSON和Java API提供其所有特性�
 
 下图是ElasticSearch的索引结构，下边黑色部分是物理结构，上边黄色部分是逻辑结构，逻辑结构也是为了更好的去描述ElasticSearch的工作原理及去使用物理结构中的索引文件。
 
-<!-- ![](img/search01.png) -->
+![](img/search01.png)
 
 逻辑结构部分是一个倒排索引表：
 
@@ -59,11 +59,11 @@ Elasticsearch使用Lucene，并试图通过JSON和Java API提供其所有特性�
 2. 将搜索的文档最终以Document方式存储起来。
 3. 每个词和docment都有关联。
 
-<!-- ![](img/search02.png) -->
+![](img/search02.png)
 
 现在，如果我们想搜索 `quick brown`，我们只需要查找包含每个词条的文档：
 
-<!-- ![](img/search03.png) -->
+![](img/search03.png)
 
 两个文档都匹配，但是第一个文档比第二个匹配度更高。如果我们使用仅计算匹配词条数量的简单 相似性算法 ，
 
@@ -73,11 +73,11 @@ Elasticsearch使用Lucene，并试图通过JSON和Java API提供其所有特性�
 
 Elasticsearch提供 RESTful Api接口进行索引、搜索，并且支持多种客户端。
 
-<!-- ![](img/search04.png) -->
+![](img/search04.png)
 
 下图是es在项目中的应用方式：
 
-<!-- ![](img/search06.png) -->
+![](img/search06.png)
 
 1. 用户在前端搜索关键字
 2. 项目前端通过http方式请求项目服务端
@@ -104,7 +104,7 @@ Elasticsearch提供 RESTful Api接口进行索引、搜索，并且支持多种�
 
 解压 elasticsearch-6.2.1.zip
 
-<!-- ![](img/search07.png) -->
+![](img/search07.png)
 
 bin：脚本目录，包括：启动、停止等可执行脚本
 config：配置文件目录
@@ -236,7 +236,7 @@ elasticsearch  ‐  nofile  65536
 
 进入bin目录，在cmd下运行：elasticsearch.bat
 
-<!-- ![](img/search08.png) -->
+![](img/search08.png)
 
 浏览器输入：http://localhost:9200
 
@@ -298,7 +298,7 @@ npm run start
 
    成功连接ES图示:
 
-   <!-- ![](img/search09.png) -->
+   ![](img/search09.png)
 
 # 3. ES 快速入门
 
@@ -348,17 +348,17 @@ ES的索引库是一个逻辑概念，它包括了分词列表及文档列表，
 
    如下是创建的例子，创建xc_course索引库，共1个分片，0个副本：
 
-<!-- ![](img/search10.png) -->
+![](img/search10.png)
 
 结果:
 
-<!-- ![](img/search11.png) -->
+![](img/search11.png)
 
 2. 使用head插件创建
 
-<!-- ![](img/search12.png) -->
+![](img/search12.png)
 
-<!-- ![](img/search13.png) -->
+![](img/search13.png)
 
 ## 3.2 创建映射
 
@@ -407,7 +407,7 @@ post 请求：http://localhost:9200/xc_course/doc/_mapping
 
 映射创建成功，查看head界面：
 
-<!-- ![](img/search14.png) -->
+![](img/search14.png)
 
 ## 3.3  创建文档
 
@@ -421,11 +421,11 @@ ES中的文档相当于MySQL数据库表中的记录。
 
 使用PostMan测试:
 
-<!-- ![](img/search15.png) -->
+![](img/search15.png)
 
 通过head查询数据：
 
-<!-- ![](img/search16.png) -->
+![](img/search16.png)
 
 ## 3.4  搜索文档
 
@@ -435,7 +435,7 @@ ES中的文档相当于MySQL数据库表中的记录。
 
    使用 postman测试：
 
-<!-- ![](img/search17.png) -->
+![](img/search17.png)
 
 2. 查询所有记录
 
@@ -506,7 +506,7 @@ post 发送：localhost:9200/_analyze
 
 结果如下：
 
-<!-- ![](img/search18.png) -->
+![](img/search18.png)
 
 ## 4.2 安装IK分词器
 
@@ -516,11 +516,11 @@ post 发送：localhost:9200/_analyze
 
 下载zip：
 
-<!-- ![](img/search19.png) -->
+![](img/search19.png)
 
 解压，并将解压的文件拷贝到ES安装目录的plugins下的ik目录下
 
-<!-- ![](img/search20.png) -->
+![](img/search20.png)
 
 测试分词效果：
 
@@ -530,7 +530,7 @@ post 发送：localhost:9200/_analyze
 {"text":"测试分词器，后边是测试内容：spring cloud实战","analyzer":"ik_max_word" }
 ```
 
-<!-- ![](img/search21.png) -->
+![](img/search21.png)
 
 ## 4.3  两种分词模式
 
@@ -561,7 +561,7 @@ ik分词器有两种分词模式：ik_max_word和ik_smart模式。
 
 iK分词器自带一个main.dic的文件，此文件为词库文件。
 
-<!-- ![](img/search22.png) -->
+![](img/search22.png)
 
 在上边的目录中新建一个my.dic文件（注意文件格式为utf-8（不要选择utf-8 BOM））
 
@@ -571,7 +571,7 @@ iK分词器自带一个main.dic的文件，此文件为词库文件。
 
 配置文件中配置my.dic
 
-<!-- ![](img/search23.png) -->
+![](img/search23.png)
 
 重启ES，测试分词效果：
 
@@ -579,7 +579,7 @@ iK分词器自带一个main.dic的文件，此文件为词库文件。
 
 {"text":"测试分词器，后边是测试内容：spring cloud实战","analyzer":"ik_max_word" }
 
-<!-- ![](img/search24.png) -->
+![](img/search24.png)
 
 # 5. 映射
 
@@ -625,7 +625,7 @@ iK分词器自带一个main.dic的文件，此文件为词库文件。
 
 ## 5.2  常用映射类型
 
-<!-- ![](img/search25.png) -->
+![](img/search25.png)
 
 字符串包括 text和keyword两种类型
 
@@ -793,7 +793,7 @@ Post :http://localhost:9200/xc_course/doc/3
 
 下边是ES支持的数值类型
 
-<!-- ![](img/search26.png) -->
+![](img/search26.png)
 
 1. 尽量选择范围小的类型，提高搜索效率
 2. 对于浮点数尽量用比例因子，比如一个价格字段，单位为元，我们将比例因子设置为100这在ES中会按分存储，映射如下：
@@ -813,7 +813,7 @@ Post :http://localhost:9200/xc_course/doc/3
 
 如果比例因子不适合，则从下表选择范围小的去用：
 
-<!-- ![](img/search27.png) -->
+![](img/search27.png)
 
 更新已有映射，并插入文档：
 
@@ -2466,7 +2466,7 @@ ES通常以集群方式工作，这样做不仅能够提高 ES的搜索能力还
 
 下图是ES集群结构的示意图：
 
-<!-- ![](img/search28.png) -->
+![](img/search28.png)
 
 从上图总结以下概念：
 
@@ -2592,17 +2592,17 @@ http.cors.allow‐origin: /.*/
 
 1. 使用head连上其中一个结点
 
-<!-- ![](img/search29.png) -->
+![](img/search29.png)
 
 上图表示两个结点已经创建成功。
 
 2. 下边创建索引库，共2个分片，每个分片一个副本。
 
-<!-- ![](img/search30.png) -->
+![](img/search30.png)
 
 创建成功，刷新head:
 
-<!-- ![](img/search31.png) -->
+![](img/search31.png)
 
 上图可以看到共有4个分片，其中两个分片是副本。
 
@@ -2686,7 +2686,7 @@ Get请求：http://localhost:9200/_cluster/health
 
    ES会重新选中一个主结点（前提在配置结点时允许它可以为主结点）
 
-<!-- ![](img/search32.png) -->
+![](img/search32.png)
 
 ​	此时向活的结点发起搜索请求，仍然正常。
 
@@ -2706,7 +2706,7 @@ Get请求：http://localhost:9200/_cluster/health
 
    启动结点3，刷新head，下图显示ES将分片分在了3个结点
 
-   <!-- ![](img/search33.png) -->
+   ![](img/search33.png)
 
    向结点 3发起搜索请求：
 
