@@ -35,19 +35,17 @@ Java 也用于科学计算和研究领域，利用其强大的性能和稳定性
 * 云计算：
 Java 是许多云计算平台的基础，提供了开发云端应用和服务的支持。
 Java 的跨平台特性（"一次编写，到处运行"）和强大的标准库使其成为一个非常灵活和强大的编程语言。
-## Java环境搭建
+## Java环境配置
+### 下载JDK8
+[JDK8](https://www.oracle.com/java/technologies/downloads/?er=221886#java8)
 
-变量名：JAVA_HOME
-
-变量值：C:\Program Files (x86)\Java\jdk1.8.0_91        // 要根据自己的实际路径配置
-
-变量名：CLASSPATH
-
-变量值：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;         //记得前面有个"."
-
-变量名：Path
-
-变量值：%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;
+### 配置环境变量
+#### JAVA_HOME
+变量值：`C:\Program Files (x86)\Java\jdk1.8.0_91`         // 要根据自己的实际路径配置
+#### CLASSPATH
+变量值：`.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;`           //记得前面有个"."
+#### Path
+变量值：`%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;` 
 
 **测试JDK是否安装成功**
 1. "开始"->"运行"，键入"cmd"；
@@ -71,7 +69,7 @@ Java 的跨平台特性（"一次编写，到处运行"）和强大的标准库�
 
 ## 注解
 
-## 异常处理
+## 异常
 
 ## IO流
 

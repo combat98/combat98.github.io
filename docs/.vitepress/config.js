@@ -1,6 +1,6 @@
 import mdItCustomAttrs from 'markdown-it-custom-attrs'
 export default {
-    title: 'Java成长之路',
+    title: '热爱',
     description: '只要学不死，就往死里学！',
     head: [
         ['link', {rel: 'icon', href: '/favicon.ico'}],
@@ -119,8 +119,13 @@ export default {
                             },
                         ],
                     },
-                    {text: 'JUC', link: '/java/juc/index'},
-                    {text: 'JVM', link: '/java/jvm/index'},
+                    {
+                        text: '♥️ Java进阶',
+                        items:[
+                            {text: 'JUC', link: '/java/juc/index'},
+                            {text: 'JVM', link: '/java/jvm/index'},
+                        ]
+                    },
                     {text: '🎁 Spring全家桶',
                         items: [
                             {
@@ -155,6 +160,42 @@ export default {
                 ]
             },
             {
+                text: '.NET',
+                items: [
+                    {
+                        text: '🥦 C#基础',
+                        items: [
+                            {text: 'C#语言基础', link: '/dotnet/csharp/index'},
+                            {text: '面向对象', link: '/dotnet/csharp/oop/index'},
+                            {text: '异步编程', link: '/dotnet/csharp/async/index'},
+                        ],
+                    },
+                    {
+                        text: '♥️ ASP.NET Core',
+                        items: [
+                            {text: 'ASP.NET Core基础', link: '/dotnet/aspnetcore/index'},
+                            {text: 'Web API', link: '/dotnet/aspnetcore/webapi/index'},
+                            {text: 'MVC', link: '/dotnet/aspnetcore/mvc/index'},
+                            {text: 'Blazor', link: '/dotnet/aspnetcore/blazor/index'},
+                        ],
+                    },
+                    {
+                        text: '🎁 ORM框架',
+                        items: [
+                            {text: 'Entity Framework Core', link: '/dotnet/ef/index'},
+                            {text: 'Dapper', link: '/dotnet/dapper/index'},
+                        ],
+                    },
+                    {
+                        text: '🏠 桌面开发',
+                        items: [
+                            {text: 'WPF', link: '/dotnet/wpf/index'},
+                            {text: 'WinForms', link: '/dotnet/winforms/index'},
+                        ],
+                    },
+                ]
+            },
+            {
                 text: 'Web',
                 items: [
                     {
@@ -170,7 +211,6 @@ export default {
                         text: '🥦 服务器端',
                         items: [
                             {text: 'Node', link: '/frontend/server/node'},
-                            {text: 'Express', link: '/frontend/server/express/page'},
                             {text: 'NestJS', link: '/frontend/server/nest'},
                         ],
                     },
@@ -201,7 +241,7 @@ export default {
                 ]
             },
             {
-                text: 'python',
+                text: 'Python',
                 items: [
                     {text: 'Python基础', link: '/python/base/index'},
                 ]
@@ -257,7 +297,23 @@ export default {
                         ],
                     },
                 ]
+            },
+            {
+                text: '工具',
+                items: [
+                    {
+                        text: '🥦 开发工具',
+                        items: [
+                            {text: 'VS Code', link: '/tool/vscode/index'},
+                            {text: 'JetBrains IDE', link: '/tool/jetbrains/index'},
+                            {text: 'Visual Studio', link: '/tool/visualstudio/index'},
+                            {text: 'Git', link: '/tool/git/index'},
+                        ],
+                    },
+                ]
             }
+
+
         ]
     }
 

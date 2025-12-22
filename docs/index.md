@@ -5,8 +5,8 @@ layout: home
 titleTemplate: 编程之路
 
 hero:
-  name: 南忆-文档站
-  text: 全栈编程知识体系
+  name: 全栈编程知识体系
+text: 
   tagline: KeepCoding,KeepWriting
   #  image:
   #    src: /images/auth.png
@@ -19,22 +19,31 @@ hero:
       text: 了解更多
       link: /home/right
 features:
-  - icon: 👷
-    title: 计算机四大件
-    details: 数据结构与算法、设计模式、操作系统、计算机网络
-  - icon: 👋
+  - icon: 💡
+    title: 计算机科学基础
+    details: 数据结构与算法、设计模式、操作系统、计算机网络、计算机组成原理
+  - icon: 💾
     title: 数据库
-    details: MySql、SQLServer、Oracle等
-  - icon: 👋
+    details: MySQL、SQLServer、Oracle、Redis、Elasticsearch、MongoDB等
+  - icon: 🔌
     title: 中间件
-    details: RabbitMQ、RocketMQ、kafka、MyCat、Sharding sphere等
-  - icon: 👷
-    title: 后端
-    details: Java、python
-  - icon: 🚀
-    title: 前端
-    details: Html、Css、JavaScript、TypeScript、React、Vue等
-  - icon: 💪
-    title: Devops
-    details: linux、docker、k8s等
+    details: RabbitMQ、RocketMQ、Kafka、MyCat、Sharding Sphere等
+  - icon: ☕
+    title: Java生态
+    details: JavaSE、JVM、JUC、Spring、SpringBoot、SpringMVC、MyBatis、MyBatis-Plus等
+  - icon: 🌐
+    title: .NET
+    details: C#、ASP.NET Core、Entity Framework、WPF、Blazor等
+  - icon: 📊
+    title: Python
+    details: Python基础、数据分析、Web开发、自动化脚本等
+  - icon: 🎨
+    title: 前端技术
+    details: HTML、CSS、JavaScript、TypeScript、React、Vue、Node.js等
+  - icon: 🐳
+    title: DevOps
+    details: Linux、Shell、Docker、Kubernetes、Jenkins、CI/CD等
+  - icon: 📦
+    title: 开发工具
+    details: Git、Maven、Gradle、IDEA、VSCode等常用开发工具
 ---
