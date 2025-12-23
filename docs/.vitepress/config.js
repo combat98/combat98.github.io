@@ -226,6 +226,26 @@ export default {
                 ]
             },
             {
+                text: '编程语言',
+                items: [
+                    {
+                        text: '🚀 新兴语言',
+                        items: [
+                            {text: 'Golang', link: '/golang/base/index'},
+                            {text: 'Rust', link: '/rust/base/index'},
+                            {text: 'Kotlin', link: '/kotlin/base/index'},
+                        ],
+                    },
+                    {
+                        text: '📚 传统语言',
+                        items: [
+                            {text: 'C++', link: '/cpp/base/index'},
+                            {text: 'PHP', link: '/php/base/index'},
+                        ],
+                    },
+                ]
+            },
+            {
                 text: '计算机科学基础',
                 items: [
                     {text: '数据结构与算法', link: '/program/dataStructure'},
