@@ -187,12 +187,26 @@ export default {
                 ]
             },
             {
-                text: 'DevOps',
+                text: 'DevOps & 工具',
                 items: [
-                    {text: 'Linux', link: '/devops/linux/index'},
-                    {text: 'Docker', link: '/devops/docker/index'},
-                    {text: 'Jenkins', link: '/devops/jenkins/index'},
-                    {text: 'Kubernetes', link: '/devops/k8s/index'},
+                    {
+                        text: '🚀 DevOps',
+                        items: [
+                            {text: 'Linux', link: '/devops/linux/index'},
+                            {text: 'Docker', link: '/devops/docker/index'},
+                            {text: 'Jenkins', link: '/devops/jenkins/index'},
+                            {text: 'Kubernetes', link: '/devops/k8s/index'},
+                        ],
+                    },
+                    {
+                        text: '🛠️ 开发工具',
+                        items: [
+                            {text: 'VS Code', link: '/tool/vscode/index'},
+                            {text: 'JetBrains IDE', link: '/tool/jetbrains/index'},
+                            {text: 'Visual Studio', link: '/tool/visualstudio/index'},
+                            {text: 'Git', link: '/tool/git/index'},
+                        ],
+                    },
                 ]
             },
             {
@@ -296,20 +310,7 @@ export default {
                     },
                 ]
             },
-            {
-                text: '工具',
-                items: [
-                    {
-                        text: '🥦 开发工具',
-                        items: [
-                            {text: 'VS Code', link: '/tool/vscode/index'},
-                            {text: 'JetBrains IDE', link: '/tool/jetbrains/index'},
-                            {text: 'Visual Studio', link: '/tool/visualstudio/index'},
-                            {text: 'Git', link: '/tool/git/index'},
-                        ],
-                    },
-                ]
-            }
+
 
 
         ]
