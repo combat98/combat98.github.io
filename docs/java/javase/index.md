@@ -922,3 +922,592 @@ public class ObjectFactory {
 // 使用
 Person person = ObjectFactory.create(Person.class);
 ```
+
+
+## 网络编程
+
+### 网络编程基础
+
+Java 提供了强大的网络编程能力，主要通过 `java.net` 包实现。
+
+#### 网络通信三要素
+
+1. **IP 地址**：网络中设备的唯一标识
+2. **端口号**：应用程序的唯一标识（0-65535）
+3. **协议**：通信规则（TCP、UDP）
+
+### InetAddress 类
+
+```java
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class InetAddressDemo {
+    public static void main(String[] args) throws UnknownHostException {
+        // 获取本机 InetAddress 对象
+        InetAddress localHost = InetAddress.getLocalHost();
+        System.out.println("本机名称：" + localHost.getHostName());
+        System.out.println("本机IP：" + localHost.getHostAddress());
+        
+        // 根据主机名获取 InetAddress 对象
+        InetAddress host = InetAddress.getByName("www.baidu.com");
+        System.out.println("百度主机名：" + host.getHostName());
+        System.out.println("百度IP：" + host.getHostAddress());
+        
+        // 获取所有IP地址
+        InetAddress[] addresses = InetAddress.getAllByName("www.baidu.com");
+        for (InetAddress addr : addresses) {
+            System.out.println(addr.getHostAddress());
+        }
+    }
+}
+```
+
+### TCP 编程
+
+TCP（Transmission Control Protocol）是面向连接的、可靠的传输协议。
+
+#### TCP 服务器端
+
+```java
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class TCPServer {
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(8888)) {
+            System.out.println("服务器启动，等待客户端连接...");
+            
+            // 监听客户端连接
+            Socket socket = serverSocket.accept();
+            System.out.println("客户端已连接：" + socket.getInetAddress().getHostAddress());
+            
+            // 获取输入流，读取客户端消息
+            BufferedReader reader = new BufferedReader(
+                new InputStreamReader(socket.getInputStream())
+            );
+            String message = reader.readLine();
+            System.out.println("收到客户端消息：" + message);
+            
+            // 获取输出流，向客户端发送消息
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            writer.println("服务器收到：" + message);
+            
+            // 关闭资源
+            reader.close();
+            writer.close();
+            socket.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### TCP 客户端
+
+```java
+import java.io.*;
+import java.net.Socket;
+
+public class TCPClient {
+    public static void main(String[] args) {
+        try (Socket socket = new Socket("localhost", 8888)) {
+            System.out.println("已连接到服务器");
+            
+            // 获取输出流，向服务器发送消息
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            writer.println("你好，服务器！");
+            
+            // 获取输入流，读取服务器响应
+            BufferedReader reader = new BufferedReader(
+                new InputStreamReader(socket.getInputStream())
+            );
+            String response = reader.readLine();
+            System.out.println("服务器响应：" + response);
+            
+            // 关闭资源
+            writer.close();
+            reader.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### 多线程服务器
+
+```java
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class MultiThreadServer {
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(8888)) {
+            System.out.println("服务器启动，等待客户端连接...");
+            
+            while (true) {
+                Socket socket = serverSocket.accept();
+                System.out.println("客户端已连接：" + socket.getInetAddress().getHostAddress());
+                
+                // 为每个客户端创建一个新线程
+                new Thread(new ClientHandler(socket)).start();
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class ClientHandler implements Runnable {
+    private Socket socket;
+    
+    public ClientHandler(Socket socket) {
+        this.socket = socket;
+    }
+    
+    @Override
+    public void run() {
+        try {
+            BufferedReader reader = new BufferedReader(
+                new InputStreamReader(socket.getInputStream())
+            );
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            
+            String message;
+            while ((message = reader.readLine()) != null) {
+                System.out.println("收到消息：" + message);
+                writer.println("服务器回复：" + message);
+                
+                if ("bye".equalsIgnoreCase(message)) {
+                    break;
+                }
+            }
+            
+            reader.close();
+            writer.close();
+            socket.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### UDP 编程
+
+UDP（User Datagram Protocol）是无连接的、不可靠的传输协议。
+
+#### UDP 发送端
+
+```java
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+
+public class UDPSender {
+    public static void main(String[] args) {
+        try {
+            // 创建 DatagramSocket
+            DatagramSocket socket = new DatagramSocket();
+            
+            // 准备数据
+            String message = "Hello, UDP!";
+            byte[] data = message.getBytes();
+            
+            // 创建数据包
+            InetAddress address = InetAddress.getByName("localhost");
+            DatagramPacket packet = new DatagramPacket(data, data.length, address, 9999);
+            
+            // 发送数据包
+            socket.send(packet);
+            System.out.println("消息已发送：" + message);
+            
+            // 关闭资源
+            socket.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### UDP 接收端
+
+```java
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+public class UDPReceiver {
+    public static void main(String[] args) {
+        try {
+            // 创建 DatagramSocket，绑定端口
+            DatagramSocket socket = new DatagramSocket(9999);
+            System.out.println("UDP 接收端启动，等待数据...");
+            
+            // 准备接收数据的缓冲区
+            byte[] buffer = new byte[1024];
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+            
+            // 接收数据包
+            socket.receive(packet);
+            
+            // 解析数据
+            String message = new String(packet.getData(), 0, packet.getLength());
+            System.out.println("收到消息：" + message);
+            System.out.println("发送方：" + packet.getAddress().getHostAddress());
+            System.out.println("端口：" + packet.getPort());
+            
+            // 关闭资源
+            socket.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### URL 和 URLConnection
+
+#### URL 类
+
+```java
+import java.net.URL;
+
+public class URLDemo {
+    public static void main(String[] args) {
+        try {
+            URL url = new URL("https://www.example.com:8080/path/index.html?name=value#section");
+            
+            System.out.println("协议：" + url.getProtocol());
+            System.out.println("主机：" + url.getHost());
+            System.out.println("端口：" + url.getPort());
+            System.out.println("路径：" + url.getPath());
+            System.out.println("文件：" + url.getFile());
+            System.out.println("查询：" + url.getQuery());
+            System.out.println("锚点：" + url.getRef());
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### URLConnection 下载文件
+
+```java
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class DownloadFile {
+    public static void main(String[] args) {
+        try {
+            URL url = new URL("https://www.example.com/file.txt");
+            URLConnection connection = url.openConnection();
+            
+            // 获取输入流
+            InputStream inputStream = connection.getInputStream();
+            
+            // 创建输出流
+            FileOutputStream outputStream = new FileOutputStream("downloaded_file.txt");
+            
+            // 读取并写入
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, length);
+            }
+            
+            System.out.println("文件下载完成");
+            
+            // 关闭资源
+            inputStream.close();
+            outputStream.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### HTTP 请求（使用 HttpURLConnection）
+
+```java
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class HttpRequestDemo {
+    public static void main(String[] args) {
+        try {
+            // GET 请求
+            URL url = new URL("https://api.github.com/users/github");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
+            // 设置请求方法
+            connection.setRequestMethod("GET");
+            
+            // 设置请求头
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            
+            // 获取响应码
+            int responseCode = connection.getResponseCode();
+            System.out.println("响应码：" + responseCode);
+            
+            // 读取响应
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream())
+                );
+                
+                String line;
+                StringBuilder response = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                
+                System.out.println("响应内容：");
+                System.out.println(response.toString());
+            }
+            
+            connection.disconnect();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### POST 请求
+
+```java
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class HttpPostDemo {
+    public static void main(String[] args) {
+        try {
+            URL url = new URL("https://httpbin.org/post");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            
+            // 设置请求方法为 POST
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            
+            // 设置请求头
+            connection.setRequestProperty("Content-Type", "application/json");
+            
+            // 发送 POST 数据
+            String jsonData = "{\"name\":\"张三\",\"age\":25}";
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(jsonData.getBytes());
+            outputStream.flush();
+            outputStream.close();
+            
+            // 读取响应
+            int responseCode = connection.getResponseCode();
+            System.out.println("响应码：" + responseCode);
+            
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream())
+                );
+                
+                String line;
+                StringBuilder response = new StringBuilder();
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                
+                System.out.println("响应内容：");
+                System.out.println(response.toString());
+            }
+            
+            connection.disconnect();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### 简单的聊天室示例
+
+#### 服务器端
+
+```java
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChatServer {
+    private static List<ClientThread> clients = new ArrayList<>();
+    
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(8888)) {
+            System.out.println("聊天室服务器启动...");
+            
+            while (true) {
+                Socket socket = serverSocket.accept();
+                ClientThread client = new ClientThread(socket);
+                clients.add(client);
+                client.start();
+                System.out.println("新用户加入，当前在线：" + clients.size());
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // 广播消息给所有客户端
+    public static void broadcast(String message, ClientThread sender) {
+        for (ClientThread client : clients) {
+            if (client != sender) {
+                client.sendMessage(message);
+            }
+        }
+    }
+    
+    // 移除客户端
+    public static void removeClient(ClientThread client) {
+        clients.remove(client);
+        System.out.println("用户离开，当前在线：" + clients.size());
+    }
+}
+
+class ClientThread extends Thread {
+    private Socket socket;
+    private BufferedReader reader;
+    private PrintWriter writer;
+    
+    public ClientThread(Socket socket) {
+        this.socket = socket;
+        try {
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            writer = new PrintWriter(socket.getOutputStream(), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void run() {
+        try {
+            String message;
+            while ((message = reader.readLine()) != null) {
+                System.out.println("收到消息：" + message);
+                ChatServer.broadcast(message, this);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            ChatServer.removeClient(this);
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void sendMessage(String message) {
+        writer.println(message);
+    }
+}
+```
+
+#### 客户端
+
+```java
+import java.io.*;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class ChatClient {
+    public static void main(String[] args) {
+        try {
+            Socket socket = new Socket("localhost", 8888);
+            System.out.println("已连接到聊天室");
+            
+            // 接收消息的线程
+            new Thread(() -> {
+                try {
+                    BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(socket.getInputStream())
+                    );
+                    String message;
+                    while ((message = reader.readLine()) != null) {
+                        System.out.println(message);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            
+            // 发送消息
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            Scanner scanner = new Scanner(System.in);
+            
+            System.out.print("请输入昵称：");
+            String nickname = scanner.nextLine();
+            
+            String message;
+            while (true) {
+                message = scanner.nextLine();
+                if ("exit".equalsIgnoreCase(message)) {
+                    break;
+                }
+                writer.println(nickname + ": " + message);
+            }
+            
+            socket.close();
+            scanner.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### 网络编程最佳实践
+
+1. **资源管理**：使用 try-with-resources 自动关闭资源
+2. **异常处理**：妥善处理网络异常
+3. **线程安全**：多线程环境下注意同步
+4. **超时设置**：设置连接和读取超时
+5. **缓冲区大小**：合理设置缓冲区大小
+6. **编码问题**：注意字符编码转换
+
+```java
+// 设置超时示例
+Socket socket = new Socket();
+socket.connect(new InetSocketAddress("localhost", 8888), 5000); // 连接超时5秒
+socket.setSoTimeout(10000); // 读取超时10秒
+```
+
+## 参考资源
+
+- [Java 官方文档](https://docs.oracle.com/javase/8/docs/)
+- [Java 网络编程](https://docs.oracle.com/javase/tutorial/networking/)

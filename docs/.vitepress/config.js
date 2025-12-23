@@ -255,44 +255,38 @@ export default {
                 ]
             },
             {
-                text: '数据库',
+                text: '后端技术栈',
                 items: [
                     {
-                        text: '🥦 关系型数据库',
+                        text: '🗄️ 关系型数据库',
                         items: [
-                            {text: 'Mysql', link: '/database/SQL/mysql'},
-                            {text: 'PostgresSQL', link: '/database/SQL/PostgresSQL'},
-                            {text: 'SQLServer', link: '/database/SQL/SQLServer'},
+                            {text: 'MySQL', link: '/database/SQL/mysql'},
+                            {text: 'PostgreSQL', link: '/database/SQL/PostgresSQL'},
+                            {text: 'SQL Server', link: '/database/SQL/SQLServer'},
                             {text: 'Oracle', link: '/database/SQL/Oracle'},
                         ],
                     },
                     {
-                        text: '🏠 非关系型数据库',
+                        text: '📦 非关系型数据库',
                         items: [
                             {text: 'Redis', link: '/database/NoSQL/Redis'},
                             {text: 'Elasticsearch', link: '/database/NoSQL/Elasticsearch'},
                             {text: 'MongoDB', link: '/database/NoSQL/MongoDB'},
                         ],
                     },
-
-                ]
-            },
-            {
-                text: '中间件',
-                items: [
                     {
-                        text: '🥦 消息中间件',
+                        text: '📨 消息中间件',
                         items: [
                             {text: 'RabbitMQ', link: '/middleware/message/rabbit'},
                             {text: 'Kafka', link: '/middleware/message/kafka'},
-                            {text: 'Rocket', link: '/middleware/message/rocket'},
+                            {text: 'RocketMQ', link: '/middleware/message/rocket'},
                         ],
                     },
                     {
-                        text: '🏠 数据库中间件',
+                        text: '🔧 数据库中间件',
                         items: [
                             {text: 'Mycat', link: '/middleware/database/Mycat'},
-                            {text: 'ShardingSphere', link: '/middleware/database/ShardingSphere'},               
+                            {text: 'ShardingSphere', link: '/middleware/database/ShardingSphere'},
                         ],
                     },
                 ]
