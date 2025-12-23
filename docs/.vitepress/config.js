@@ -231,16 +231,21 @@ export default {
                     {
                         text: '🚀 新兴语言',
                         items: [
-                            {text: 'Golang', link: '/golang/base/index'},
-                            {text: 'Rust', link: '/rust/base/index'},
-                            {text: 'Kotlin', link: '/kotlin/base/index'},
+                            {text: 'Golang 基础', link: '/golang/base/index'},
+                            {text: 'Golang 学习路线', link: '/golang/roadmap/index'},
+                            {text: 'Rust 基础', link: '/rust/base/index'},
+                            {text: 'Rust 学习路线', link: '/rust/roadmap/index'},
+                            {text: 'Kotlin 基础', link: '/kotlin/base/index'},
+                            {text: 'Kotlin 学习路线', link: '/kotlin/roadmap/index'},
                         ],
                     },
                     {
                         text: '📚 传统语言',
                         items: [
-                            {text: 'C++', link: '/cpp/base/index'},
-                            {text: 'PHP', link: '/php/base/index'},
+                            {text: 'C++ 基础', link: '/cpp/base/index'},
+                            {text: 'C++ 学习路线', link: '/cpp/roadmap/index'},
+                            {text: 'PHP 基础', link: '/php/base/index'},
+                            {text: 'PHP 学习路线', link: '/php/roadmap/index'},
                         ],
                     },
                 ]
