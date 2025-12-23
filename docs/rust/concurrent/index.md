@@ -118,8 +118,9 @@ fn main() {
 
 ## 共享状态
 
-### Mutex<T>
+### Mutex 互斥锁
 
+::: code-group
 ```rust
 use std::sync::Mutex;
 
@@ -134,9 +135,11 @@ fn main() {
     println!("m = {:?}", m);
 }
 ```
+:::
 
 ### 多线程共享 Mutex
 
+::: code-group
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -161,6 +164,7 @@ fn main() {
     println!("结果: {}", *counter.lock().unwrap());
 }
 ```
+:::
 
 ## 异步编程（Tokio）
 
@@ -200,6 +204,7 @@ async fn main() {
 
 ### 异步 HTTP 请求
 
+::: code-group
 ```rust
 use tokio;
 
@@ -214,6 +219,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+:::
 
 ## 参考资源
 

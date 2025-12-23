@@ -214,6 +214,7 @@ fn main() {
 
 ### 生命周期注解
 
+::: code-group
 ```rust
 fn main() {
     let string1 = String::from("long string is long");
@@ -234,9 +235,11 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     }
 }
 ```
+:::
 
 ### 结构体中的生命周期
 
+::: code-group
 ```rust
 struct ImportantExcerpt<'a> {
     part: &'a str,
@@ -255,7 +258,7 @@ impl<'a> ImportantExcerpt<'a> {
 
 fn main() {
     let novel = String::from("Call me Ishmael. Some years ago...");
-    let first_sentence = novel.split('.').next().expect("找不到 '.'");
+    let first_sentence = novel.split('.').next().expect("找不到句号");
     let i = ImportantExcerpt {
         part: first_sentence,
     };
@@ -263,9 +266,11 @@ fn main() {
     println!("{}", i.part);
 }
 ```
+:::
 
 ### 生命周期省略规则
 
+::: code-group
 ```rust
 // 编译器可以推断生命周期
 fn first_word(s: &str) -> &str {
@@ -286,6 +291,7 @@ fn first_word_explicit<'a>(s: &'a str) -> &'a str {
     &s[..]
 }
 ```
+:::
 
 ### 静态生命周期
 
@@ -299,8 +305,9 @@ fn main() {
 
 ## 智能指针
 
-### Box<T>
+### Box 智能指针
 
+::: code-group
 ```rust
 fn main() {
     // 在堆上分配数据
@@ -318,9 +325,11 @@ fn main() {
     let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
 }
 ```
+:::
 
-### Rc<T>（引用计数）
+### Rc 引用计数
 
+::: code-group
 ```rust
 use std::rc::Rc;
 
@@ -339,9 +348,11 @@ fn main() {
     println!("引用计数: {}", Rc::strong_count(&a));
 }
 ```
+:::
 
-### RefCell<T>（内部可变性）
+### RefCell 内部可变性
 
+::: code-group
 ```rust
 use std::cell::RefCell;
 
@@ -353,6 +364,7 @@ fn main() {
     println!("data: {:?}", data.borrow());
 }
 ```
+:::
 
 ## 参考资源
 

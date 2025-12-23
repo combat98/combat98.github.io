@@ -412,6 +412,7 @@ fn main() {
 
 ### Option 和 Result
 
+::: code-group
 ```rust
 fn main() {
     // Option<T>
@@ -448,6 +449,7 @@ fn divide(a: f64, b: f64) -> Result<f64, String> {
     }
 }
 ```
+:::
 
 ### 错误处理
 
