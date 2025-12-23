@@ -18,7 +18,7 @@ export default {
     cleanUrls: false,
     themeConfig: {
         lastUpdatedText: "最近更新时间",
-        siteTitle: 'combat',
+        siteTitle: '编程之路',
         logo: '/images/logo-mini.svg',
         outlineTitle: '导航目录',
         search: {
@@ -56,45 +56,7 @@ export default {
 
         /*侧边栏*/
         sidebar: {
-            // 当用户位于 `guide` 目录时，会显示此侧边栏
-           '/middleware/message/': [
-                {text: 'Rocket', link: '/middleware/message/rocket'},
-                {text: 'RabbitMQ', link: '/middleware/message/rabbit'},
-                {text: 'Kafka', link: '/middleware/message/kafka'}
-            ],
-            '/middleware/database': [
-                {
-                    text: '数据库中间件',
-                    items: [
-                        {text: 'ShardingSphere', link: '/middleware/database/ShardingSphere'},
-                        {text: 'Mycat', link: '/middleware/database/Mycat'},
-                    ]
-                }
-            ],
-            '/database/SQL':[
-                {text: 'Mysql', link: '/database/SQL/mysql'},
-                {text: 'PostgresSQL', link: '/database/SQL/PostgresSQL'},
-                {text: 'SQLServer', link: '/database/SQL/SQLServer'},
-                {text: 'Oracle', link: '/database/SQL/Oracle'},
-            ],
-            '/database/NoSQL':[
-                {text: 'Redis', link: '/database/NoSQL/Redis'},
-                {text: 'Elasticsearch', link: '/database/NoSQL/Elasticsearch'},
-                {text: 'MongoDB', link: '/database/NoSQL/MongoDB'},
-            ],
-
-            '/program':[
-                {text: '数据结构与算法', link: '/program/dataStructure'},
-                {text: '设计模式', link: '/program/design', prev: '/program/dataStructure'},
-                {text: '计算机网络', link: '/program/network'},
-                {text: '操作系统', link: '/program/os'},
-            ],
-            'frontend/base':[
-                {text: 'Html', link: '/frontend/base/html/index'},
-                {text: 'Css', link: '/frontend/base/css/index'},
-                {text: 'JavaScript', link: '/frontend/base/javascript/index'},
-                {text: 'TypeScript', link: '/frontend/base/typescript/index'},
-            ]
+        
         },
         /*导航栏*/
         nav: [
@@ -112,11 +74,7 @@ export default {
                             {
                                 text: '面向对象',
                                 link: '/java/javase/oop/index',
-                            },
-                            {
-                                text: '多线程',
-                                link: '/java/javase/thread/index',
-                            },
+                            }
                         ],
                     },
                     {
@@ -144,19 +102,22 @@ export default {
                                 text: 'SpringSecurity',
                                 link: '/java/springsecurity/index',
                             },
+                             {
+                                text: 'SpringData',
+                                link: '/java/springdata/index',
+                            },
+                            {
+                                text: 'SpringCloud',
+                                link: '/java/springcloud/index',
+                            },
                         ],},
-                    {text: '🏠 Orm',
+                    {text: '🏠 框架',
                         items: [
                             {
                                 text: 'Mybatis',
                                 link: '/java/mybatis/index',
                             },
-                            {
-                                text: 'MybatisPlus',
-                                link: '/java/mybatisplus/index',
-                            }
                         ],},
-                    {text: 'SpringCloud', link: '/404'},
                 ]
             },
             {
@@ -196,37 +157,31 @@ export default {
                 ]
             },
             {
-                text: 'Web',
+                text: 'BigFrontEnd',
                 items: [
                     {
                         text: '🎁 基础以及提升篇',
                         items: [
-                            {text: 'Html', link: '/frontend/base/html/index'},
-                            {text: 'Css', link: '/frontend/base/css/index'},
+                            {text: 'HTML', link: '/frontend/base/html/index'},
+                            {text: 'CSS', link: '/frontend/base/css/index'},
                             {text: 'JavaScript', link: '/frontend/base/javascript/index'},
                             {text: 'TypeScript', link: '/frontend/base/typescript/index'},
+                            {text: 'Node', link: '/frontend/server/node/index'}
                         ],
                     },
                     {
-                        text: '🥦 服务器端',
+                        text: '🏠 主流框架',
                         items: [
-                            {text: 'Node', link: '/frontend/server/node'},
-                            {text: 'NestJS', link: '/frontend/server/nest'},
-                        ],
-                    },
-                    {
-                        text: '🏠 三大主流框架',
-                        items: [
-                            {text: 'React', link: '/frontend/js/react'},
-                            {text: 'Vue', link: '/frontend/js/vue'},
-                            {text: 'Angular', link: '/frontend/js/angular'},
+                            {text: 'React', link: '/frontend/js/react/index'},
+                            {text: 'Vue', link: '/frontend/js/vue/index'},
+                            {text: 'NestJS', link: '/frontend/server/nest/index'},
                         ],
                     },
                     {
                         text: '♥️ 跨平台开发',
                         items: [
-                            {text: 'uni-app', link: '/frontend/app/uniapp'},
-                            {text: 'Taro', link: '/frontend/app/taro'},
+                            {text: 'uni-app', link: '/frontend/app/uniapp/index'},
+                            {text: 'Flutter', link: '/frontend/app/flutter/index'},
                         ],
                     },
                 ]
@@ -234,20 +189,44 @@ export default {
             {
                 text: 'DevOps',
                 items: [
-                    {text: 'linux', link: '/404'},
-                    {text: 'docker', link: '/404'},
-                    {text: 'Jenkins', link: '/404'},
-                    {text: 'k8s', link: '/404'},
+                    {text: 'Linux', link: '/devops/linux/index'},
+                    {text: 'Docker', link: '/devops/docker/index'},
+                    {text: 'Jenkins', link: '/devops/jenkins/index'},
+                    {text: 'Kubernetes', link: '/devops/k8s/index'},
                 ]
             },
             {
                 text: 'Python',
                 items: [
-                    {text: 'Python基础', link: '/python/base/index'},
+                    {
+                        text: '🥦 Python基础',
+                        items: [
+                            {text: 'Python基础', link: '/python/base/index'},
+                            {text: '面向对象', link: '/python/base/oop'},
+                            {text: '多线程多进程', link: '/python/base/concurrent'},
+                        ],
+                    },
+                    {
+                        text: '♥️ 机器学习',
+                        items: [
+                            {text: 'NumPy', link: '/python/ml/numpy'},
+                            {text: 'Pandas', link: '/python/ml/pandas'},
+                            {text: 'Matplotlib', link: '/python/ml/matplotlib'},
+                            {text: 'Scikit-learn', link: '/python/ml/sklearn'},
+                        ],
+                    },
+                    {
+                        text: '🎁 Web框架',
+                        items: [
+                            {text: 'Flask', link: '/python/web/flask'},
+                            {text: 'Django', link: '/python/web/django'},
+                            {text: 'FastAPI', link: '/python/web/fastapi'},
+                        ],
+                    },
                 ]
             },
             {
-                text: '计算机四大件',
+                text: '计算机科学基础',
                 items: [
                     {text: '数据结构与算法', link: '/program/dataStructure'},
                     {text: '设计模式', link: '/program/design'},
@@ -284,16 +263,16 @@ export default {
                     {
                         text: '🥦 消息中间件',
                         items: [
-                            {text: 'Rocket', link: '/middleware/message/rocket'},
                             {text: 'RabbitMQ', link: '/middleware/message/rabbit'},
                             {text: 'Kafka', link: '/middleware/message/kafka'},
+                            {text: 'Rocket', link: '/middleware/message/rocket'},
                         ],
                     },
                     {
                         text: '🏠 数据库中间件',
                         items: [
-                            {text: 'ShardingSphere', link: '/middleware/database/ShardingSphere'},
-                            {text: 'Mycat', link: '/middleware/database/mycat'},
+                            {text: 'Mycat', link: '/middleware/database/Mycat'},
+                            {text: 'ShardingSphere', link: '/middleware/database/ShardingSphere'},               
                         ],
                     },
                 ]

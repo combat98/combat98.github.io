@@ -1,74 +1,127 @@
----
-next:
-  text: 'RabbitMQ'
-  link: '/middleware/message/rabbit'
----
-# Rocket
+# RocketMQ
 
 ## 简介
 
+Apache RocketMQ 是阿里巴巴开源的分布式消息中间件，具有低延迟、高可靠、万亿级容量和灵活的可扩展性。
 
-## 安装
-Apache官方[下载地址](http://rocketmq.apache.org/release_notes/release-notes-4.8.0/)
-### windows安装
-需要先配置好JDK环境
-#### 配置ROCKETMQ_HOME
-变量名：`ROCKETMQ_HOME`
+### 特点
 
-变量值：RocketMQ安装目录
-#### 启动nameserver
-打开CMD界面，进入自己的RocketMQ安装目录下的bin目录，输入下面命令启动 nameserver：
-> start mqnamesrv.cmd 
+- 高性能、高可靠、分布式
+- 支持顺序消息、事务消息、延迟消息
+- 万亿级消息容量保证
+- 支持集群部署和主从复制
 
-如果启动mqbroker.cmd报错，找不到主类。
-> set "JAVA_OPT=%JAVA_OPT% -cp %CLASSPATH%"
-> 
-> 改为：
-> 
->set "JAVA_OPT=%JAVA_OPT% -cp "%CLASSPATH%""
-#### 启动broker
-打开CMD界面，进入自己的RocketMQ安装目录下的bin目录，输入下面命令启动 broker：
-> start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true
+### 应用场景
 
-如果启动发生错误，弹出无法找到主类的xxx的错误，此时用文本编辑器打开 runbroker.cmd 进行编辑。
->  set CLASSPATH=.;%BASE_DIR%conf;%CLASSPATH%
-> 
-> 改成:
-> 
-> set CLASSPATH=.;%BASE_DIR%conf;"%CLASSPATH%"
-#### rocketmq-console安装
->  git clone https://github.com/apache/rocketmq-externals.git
+- 异步解耦、削峰填谷
+- 消息分发、分布式事务
+- 日志处理、流式计算
 
-**修改application.properties**
-```
-server.port=8081
-rocketmq.config.namesrvAddr=127.0.0.1:9876
-```
-**打包**
-> mvn clean package '-Dmaven.test.skip=true'
+## 核心概念
 
-**启动**
-> java -Xms300m -Xmx300m -jar rocketmq-console-ng-1.0.0.jar
-#### 建议
-```text
-mqbroker.cmd
-将其中的xmx，xms等进行修改256m，弄小一点，让服务器用
-mqnamesrv.cmd
-同理修改其中的xmx，xms等进行修改256m，弄小一点，让服务器用
+- **Producer** - 生产者
+- **Consumer** - 消费者
+- **Broker** - 消息存储服务器
+- **NameServer** - 路由注册中心
+- **Topic** - 消息主题
+- **Message Queue** - 消息队列
+- **Tag** - 消息标签
+
+## 安装配置
+
+### Docker 安装
+
+```bash
+# NameServer
+docker run -d -p 9876:9876 --name rmqnamesrv apache/rocketmq:4.9.4 sh mqnamesrv
+
+# Broker
+docker run -d -p 10911:10911 -p 10909:10909 --name rmqbroker \
+  --link rmqnamesrv:namesrv \
+  -e "NAMESRV_ADDR=namesrv:9876" \
+  apache/rocketmq:4.9.4 sh mqbroker
 ```
 
-### linux安装
-官网地址：https://rocketmq.apache.org/
-```text
-yum install unzip  可以解压zip包的依赖
-unzip rocketmq-all-4.8.0-bin-release.zip
-cd rocketmq-all-4.8.0-bin-release
-cd bin
-vim runserver.sh
-将其中的xmx，xms等进行修改256m，弄小一点，让服务器用
-vim runbroker.sh
-同理修改其中的xmx，xms等进行修改256m，弄小一点，让服务器用
-nohup sh mqnamesrv &
-tail -f ~/logs/rocketmqlogs/namesrv.log
+## 基本使用
+
+### Java 客户端
+
+```java
+// 生产者
+DefaultMQProducer producer = new DefaultMQProducer("ProducerGroup");
+producer.setNamesrvAddr("localhost:9876");
+producer.start();
+
+Message msg = new Message("MyTopic", "TagA", "Hello RocketMQ".getBytes());
+SendResult result = producer.send(msg);
+producer.shutdown();
+
+// 消费者
+DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("ConsumerGroup");
+consumer.setNamesrvAddr("localhost:9876");
+consumer.subscribe("MyTopic", "*");
+consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
+    msgs.forEach(msg -> System.out.println(new String(msg.getBody())));
+    return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+});
+consumer.start();
 ```
-## 快速入门
+
+### Spring Boot 集成
+
+```xml
+<dependency>
+    <groupId>org.apache.rocketmq</groupId>
+    <artifactId>rocketmq-spring-boot-starter</artifactId>
+    <version>2.2.2</version>
+</dependency>
+```
+
+```yaml
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: SpringBootProducerGroup
+```
+
+```java
+@Service
+public class ProducerService {
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
+    
+    public void send(String topic, String message) {
+        rocketMQTemplate.convertAndSend(topic, message);
+    }
+}
+
+@Service
+@RocketMQMessageListener(topic = "MyTopic", consumerGroup = "MyGroup")
+public class ConsumerService implements RocketMQListener<String> {
+    @Override
+    public void onMessage(String message) {
+        System.out.println("Received: " + message);
+    }
+}
+```
+
+## 消息类型
+
+- **普通消息** - 基本消息发送
+- **顺序消息** - 保证消息顺序
+- **延迟消息** - 定时投递
+- **事务消息** - 分布式事务
+- **批量消息** - 批量发送
+
+## 最佳实践
+
+1. 合理设置 Topic 和 Tag
+2. 使用消费者组实现负载均衡
+3. 监控消费延迟
+4. 使用主从模式提高可用性
+5. 合理设置消息保留时间
+
+## 参考资源
+
+- [RocketMQ 官方文档](https://rocketmq.apache.org/)
+- [Spring Boot RocketMQ](https://github.com/apache/rocketmq-spring)

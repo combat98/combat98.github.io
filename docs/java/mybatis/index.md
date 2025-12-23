@@ -675,4 +675,4 @@ MyBatis 是一款优秀的持久层框架：
 ## 参考资源
 
 - [MyBatis官方文档](https://mybatis.org/mybatis-3/zh/index.html)
-- [MyBatis从入门到精通](https://book.douban.com/subject/27074809/)
+- [MyBatisPlus官方文档](https://baomidou.com)
