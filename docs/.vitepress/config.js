@@ -165,6 +165,7 @@ export default {
                             {text: 'HTML', link: '/frontend/base/html/index'},
                             {text: 'CSS', link: '/frontend/base/css/index'},
                             {text: 'JavaScript', link: '/frontend/base/javascript/index'},
+                            {text: 'jQuery', link: '/frontend/base/jquery/index'},
                             {text: 'TypeScript', link: '/frontend/base/typescript/index'},
                             {text: 'Node', link: '/frontend/server/node/index'}
                         ],
